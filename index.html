@@ -1,185 +1,58 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IMVU Bot</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #09090d;
-      color: white;
-      min-height: 100vh;
-    }
-
-    header {
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #24242c;
-      background: #0e0e14;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #b86cff;
-    }
-
-    nav a {
-      color: #ddd;
-      text-decoration: none;
-      margin-right: 18px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 90px 20px;
-      background: radial-gradient(
-        circle at top,
-        #24184a,
-        #09090d 60%
-      );
-    }
-
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: #b86cff;
-    }
-
-    .hero p {
-      color: #aaa;
-      font-size: 18px;
-      max-width: 600px;
-      margin: auto;
-      line-height: 1.8;
-    }
-
-    .buttons {
-      margin-top: 30px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 25px;
-      margin: 7px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: bold;
-      border: 1px solid #b86cff;
-      color: white;
-      background: #17121f;
-    }
-
-    .btn:hover {
-      background: #b86cff;
-      color: #09090d;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 50px 20px;
-    }
-
-    .card {
-      background: #111118;
-      border: 1px solid #24242c;
-      border-radius: 16px;
-      padding: 25px;
-      margin-bottom: 20px;
-    }
-
-    .card h2 {
-      color: #b86cff;
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      color: #aaa;
-      line-height: 1.8;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      border-top: 1px solid #24242c;
-      color: #777;
-    }
-  </style>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحكم بوت IMVU</title>
+    <!-- تضمين مكتبة التصميم السريع -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-<body>
-
-  <header>
-    <div class="logo">IMVU Bot</div>
-
-    <nav>
-      <a href="#home">الرئيسية</a>
-      <a href="#about">عن البوت</a>
-      <a href="#contact">تواصل</a>
-    </nav>
-  </header>
-
-  <section class="hero" id="home">
-    <h1>
-      مرحباً بك في <span>IMVU Bot</span>
-    </h1>
-
-    <p>
-      بوت مخصص لمساعدتك في إدارة وتجربة IMVU
-      بطريقة سهلة وسريعة.
-    </p>
-
-    <div class="buttons">
-      <a href="#" class="btn">تشغيل البوت</a>
-      <a href="#about" class="btn">معرفة المزيد</a>
-    </div>
-  </section>
-
-  <section class="container" id="about">
-
-    <div class="card">
-      <h2>🤖 عن البوت</h2>
-      <p>
-        هذا الموقع هو الواجهة الخاصة بمشروع بوت IMVU.
-        يمكننا إضافة وظائف البوت وأوامره هنا لاحقاً.
-      </p>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-2xl shadow-lg w-full max-w-sm text-center">
+        <h1 class="text-xl font-bold mb-4">لوحة تحكم البوت 🤖</h1>
+        
+        <!-- تشغيل وإيقاف البوت -->
+        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-4">
+            <span class="font-medium">تشغيل البوت:</span>
+            <input type="checkbox" id="botToggle" class="w-6 h-6 accent-blue-600">
+        </div>
+        
+        <!-- رسالة الترحيب بالزوار -->
+        <textarea id="welcomeMsg" class="w-full p-2 border rounded-lg text-right mb-4 focus:ring-2 focus:ring-blue-500" placeholder="اكتب رسالة الترحيب هنا..."></textarea>
+        
+        <!-- زر الحفظ -->
+        <button id="saveBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-bold transition">حفظ التغييرات 💾</button>
     </div>
 
-    <div class="card">
-      <h2>⚡ المميزات</h2>
-      <p>
-        واجهة بسيطة، تصميم متجاوب مع الهاتف،
-        وإمكانية إضافة أوامر ووظائف جديدة للبوت.
-      </p>
-    </div>
+    <!-- ربط لوحة التحكم بـ Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    <div class="card" id="contact">
-      <h2>📩 تواصل</h2>
-      <p>
-        يمكنك إضافة روابط التواصل أو Discord أو أي خدمة
-        تريدها هنا.
-      </p>
-    </div>
+        // إعدادات Firebase الخاصة بمشروعك
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY", // استبدلها بـ API Key الخاص بمشروعك
+            authDomain: "imvu-iq.firebaseapp.com",
+            projectId: "imvu-iq",
+            appId: "YOUR_APP_ID" // استبدلها بـ App ID الخاص بمشروعك
+        };
 
-  </section>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-  <footer>
-    © 2026 IMVU Bot
-  </footer>
-
+        // عند الضغط على زر الحفظ يتم إرسال البيانات فوراً لـ Firestore
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            const isBotActive = document.getElementById('botToggle').checked;
+            const welcomeText = document.getElementById('welcomeMsg').value;
+            try {
+                await setDoc(doc(db, "botSettings", "config"), {
+                    active: isBotActive,
+                    welcomeMessage: welcomeText
+                });
+                alert("تم حفظ البيانات بنجاح في قاعدة البيانات! 🎉");
+            } catch (e) { 
+                alert("خطأ: تأكد من إعدادات الـ Config وتفعيل Firestore Rules."); 
+            }
+        });
+    </script>
 </body>
 </html>
