@@ -56,3 +56,39 @@
     </script>
 </body>
 </html>
+<div class="mt-4 border-t pt-4 text-right">
+    <label class="block text-gray-700 font-medium mb-2">إضافة أغنية جديدة لقائمة التشغيل:</label>
+    <div class="flex gap-2">
+        <input type="text" id="songInput" class="flex-1 p-2 border rounded-lg text-right" placeholder="اسم الأغنية أو الرابط">
+        <button id="addSongBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg font-bold">إضافة 🎵</button>
+    </div>
+</div>
+// تأكد من استيراد updateDoc و arrayUnion في بداية السكربت الخاص بك
+import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const db = getFirestore(app);
+
+// كود تشغيل زر الإضافة
+document.getElementById('addSongBtn').addEventListener('click', async () => {
+    const songName = document.getElementById('songInput').value;
+
+    if (songName.trim() === "") {
+        alert("يرجى كتابة اسم الأغنية أولاً!");
+        return;
+    }
+
+    try {
+        const botConfigRef = doc(db, "botSettings", "config");
+        
+        // استخدام arrayUnion لإضافة الأغنية للمصفوفة السحابية فورياً
+        await updateDoc(botConfigRef, {
+            playlist: arrayUnion(songName)
+        });
+
+        alert("تمت إضافة الأغنية وتحديث قائمة تشغيل البوت فورياً! 🥳");
+        document.getElementById('songInput').value = ""; // تفريغ الحقل للكتابة مجدداً
+    } catch (error) {
+        console.error("حدث خطأ أثناء إضافة الأغنية:", error);
+        alert("لم نتمكن من حفظ الأغنية، تأكد من صلاحيات Firestore.");
+    }
+});
