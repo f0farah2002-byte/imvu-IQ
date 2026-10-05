@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>IMVU.IQ</title>
+  <title>IMVU Bot</title>
 
   <style>
     * {
@@ -18,6 +16,7 @@
       font-family: Arial, sans-serif;
       background: #09090d;
       color: white;
+      min-height: 100vh;
     }
 
     header {
@@ -30,9 +29,9 @@
     }
 
     .logo {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: bold;
-      color: #8b6cff;
+      color: #b86cff;
     }
 
     nav a {
@@ -44,17 +43,20 @@
     .hero {
       text-align: center;
       padding: 90px 20px;
-      background:
-        radial-gradient(circle at top, #24184a, #09090d 60%);
+      background: radial-gradient(
+        circle at top,
+        #24184a,
+        #09090d 60%
+      );
     }
 
     .hero h1 {
-      font-size: 48px;
+      font-size: 42px;
       margin-bottom: 20px;
     }
 
     .hero h1 span {
-      color: #8b6cff;
+      color: #b86cff;
     }
 
     .hero p {
@@ -75,4 +77,109 @@
       margin: 7px;
       border-radius: 12px;
       text-decoration: none;
-     
+      font-weight: bold;
+      border: 1px solid #b86cff;
+      color: white;
+      background: #17121f;
+    }
+
+    .btn:hover {
+      background: #b86cff;
+      color: #09090d;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    .card {
+      background: #111118;
+      border: 1px solid #24242c;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      color: #b86cff;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #aaa;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      border-top: 1px solid #24242c;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">IMVU Bot</div>
+
+    <nav>
+      <a href="#home">الرئيسية</a>
+      <a href="#about">عن البوت</a>
+      <a href="#contact">تواصل</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>
+      مرحباً بك في <span>IMVU Bot</span>
+    </h1>
+
+    <p>
+      بوت مخصص لمساعدتك في إدارة وتجربة IMVU
+      بطريقة سهلة وسريعة.
+    </p>
+
+    <div class="buttons">
+      <a href="#" class="btn">تشغيل البوت</a>
+      <a href="#about" class="btn">معرفة المزيد</a>
+    </div>
+  </section>
+
+  <section class="container" id="about">
+
+    <div class="card">
+      <h2>🤖 عن البوت</h2>
+      <p>
+        هذا الموقع هو الواجهة الخاصة بمشروع بوت IMVU.
+        يمكننا إضافة وظائف البوت وأوامره هنا لاحقاً.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>⚡ المميزات</h2>
+      <p>
+        واجهة بسيطة، تصميم متجاوب مع الهاتف،
+        وإمكانية إضافة أوامر ووظائف جديدة للبوت.
+      </p>
+    </div>
+
+    <div class="card" id="contact">
+      <h2>📩 تواصل</h2>
+      <p>
+        يمكنك إضافة روابط التواصل أو Discord أو أي خدمة
+        تريدها هنا.
+      </p>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 IMVU Bot
+  </footer>
+
+</body>
+</html>
